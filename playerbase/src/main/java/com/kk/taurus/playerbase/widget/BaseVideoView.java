@@ -21,25 +21,25 @@ import android.graphics.Rect;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
+import com.kk.taurus.playerbase.AVPlayer;
 import com.kk.taurus.playerbase.assist.InterEvent;
 import com.kk.taurus.playerbase.assist.OnVideoViewEventHandler;
 import com.kk.taurus.playerbase.config.PlayerConfig;
+import com.kk.taurus.playerbase.entity.DataSource;
+import com.kk.taurus.playerbase.event.EventKey;
+import com.kk.taurus.playerbase.event.OnErrorEventListener;
+import com.kk.taurus.playerbase.event.OnPlayerEventListener;
 import com.kk.taurus.playerbase.extension.NetworkEventProducer;
 import com.kk.taurus.playerbase.log.PLog;
 import com.kk.taurus.playerbase.player.IPlayer;
-import com.kk.taurus.playerbase.AVPlayer;
-import com.kk.taurus.playerbase.entity.DataSource;
-import com.kk.taurus.playerbase.event.EventKey;
 import com.kk.taurus.playerbase.provider.IDataProvider;
-import com.kk.taurus.playerbase.event.OnErrorEventListener;
-import com.kk.taurus.playerbase.event.OnPlayerEventListener;
 import com.kk.taurus.playerbase.receiver.IReceiverGroup;
 import com.kk.taurus.playerbase.receiver.OnReceiverEventListener;
 import com.kk.taurus.playerbase.receiver.PlayerStateGetter;
@@ -83,9 +83,11 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
     private int mVideoSarDen;
     private int mVideoRotation;
 
-    private IRender.IRenderHolder mRenderHolder;
-
     private boolean isBuffering;
+
+    private boolean isCheckNetworkStateChanged = true;
+
+    private IRender.IRenderHolder mRenderHolder;
 
     private OnVideoViewEventHandler mEventAssistHandler;
 
@@ -130,14 +132,19 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
         return mSuperContainer;
     }
 
+    public void setCheckNetworkStateChanged(boolean checkNetworkStateChanged) {
+        isCheckNetworkStateChanged = checkNetworkStateChanged;
+    }
+
     //default return a SuperContainer for frame default.
     //default add NetworkEventProducer.
     //if you want custom you container ,
     //you can return a custom container extends SuperContainer.
-    protected SuperContainer onCreateSuperContainer(Context context){
+    protected SuperContainer onCreateSuperContainer(Context context) {
         SuperContainer superContainer = new SuperContainer(context);
-        if(PlayerConfig.isUseDefaultNetworkEventProducer())
+        if (PlayerConfig.isUseDefaultNetworkEventProducer() && isCheckNetworkStateChanged) {
             superContainer.addEventProducer(new NetworkEventProducer(context));
+        }
         return superContainer;
     }
 
