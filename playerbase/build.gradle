@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
-//apply from: 'bintray.gradle'
+apply plugin: 'com.vanniktech.maven.publish'
 
 android {
     compileSdkVersion 33
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
@@ -38,8 +38,6 @@ buildscript {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation "androidx.appcompat:appcompat:1.5.1"
 
     def exoPlayerVersion = "2.18.1"
