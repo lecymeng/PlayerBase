@@ -25,7 +25,7 @@ import com.kk.taurus.playerbase.config.PlayerLoader;
 import com.kk.taurus.playerbase.entity.DataSource;
 import com.kk.taurus.playerbase.entity.DecoderPlan;
 import com.kk.taurus.playerbase.log.DebugLog;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.player.BaseInternalPlayer;
 import com.kk.taurus.playerbase.event.BundlePool;
 import com.kk.taurus.playerbase.event.EventKey;
@@ -127,11 +127,11 @@ public final class AVPlayer implements IPlayer{
                             ", maybe your config classpath not found.");
         DecoderPlan plan = PlayerConfig.getPlan(mDecoderPlanId);
         if(plan!=null){
-            PLog.d(TAG,"=============================");
-            PLog.d(TAG,"DecoderPlanInfo : planId      = " + plan.getIdNumber());
-            PLog.d(TAG,"DecoderPlanInfo : classPath   = " + plan.getClassPath());
-            PLog.d(TAG,"DecoderPlanInfo : desc        = " + plan.getDesc());
-            PLog.d(TAG,"=============================");
+            PlayerLog.d(TAG,"=============================");
+            PlayerLog.d(TAG,"DecoderPlanInfo : planId      = " + plan.getIdNumber());
+            PlayerLog.d(TAG,"DecoderPlanInfo : classPath   = " + plan.getClassPath());
+            PlayerLog.d(TAG,"DecoderPlanInfo : desc        = " + plan.getDesc());
+            PlayerLog.d(TAG,"=============================");
         }
     }
 
@@ -152,7 +152,7 @@ public final class AVPlayer implements IPlayer{
      */
     public boolean switchDecoder(int decoderPlanId){
         if(mDecoderPlanId == decoderPlanId){
-            PLog.e(this.getClass().getSimpleName(),
+            PlayerLog.e(this.getClass().getSimpleName(),
                     "@@Your incoming planId is the same as the current use planId@@");
             return false;
         }
@@ -339,7 +339,7 @@ public final class AVPlayer implements IPlayer{
                             throw new RuntimeException("provider media success SERIALIZABLE_DATA must type of DataSource!");
                         }
                         DataSource data = (DataSource) obj;
-                        PLog.d(TAG,"onProviderDataSuccessMediaData : DataSource = " + data);
+                        PlayerLog.d(TAG,"onProviderDataSuccessMediaData : DataSource = " + data);
                         interPlayerSetDataSource(data);
                         internalPlayerStart(data.getStartPos());
                         //success video data call back.
@@ -357,7 +357,7 @@ public final class AVPlayer implements IPlayer{
 
         @Override
         public void onProviderError(int code, Bundle bundle) {
-            PLog.e(TAG,"onProviderError : code = " + code + ", bundle = " + bundle);
+            PlayerLog.e(TAG,"onProviderError : code = " + code + ", bundle = " + bundle);
             if(mOnProviderListener!=null)
                 mOnProviderListener.onProviderError(code, bundle);
             //need recreate a new bundle, because a bundle will be recycle after call back.

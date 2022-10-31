@@ -32,7 +32,7 @@ public class DebugLog {
     static final String EVENT_TAG_ERROR_EVENT = "frameEvent_error";
 
     public static void onPlayEventLog(int eventCode, Bundle bundle){
-        if(!PLog.LOG_OPEN)
+        if(!PlayerLog.ENABLE)
             return;
         String value;
         switch (eventCode){
@@ -149,11 +149,11 @@ public class DebugLog {
                 value = "UNKNOWN EVENT, maybe from provider, maybe from user custom code.";
                 break;
         }
-        PLog.d(EVENT_TAG_PLAY_EVENT, value);
+        PlayerLog.d(EVENT_TAG_PLAY_EVENT, value);
     }
 
     public static void onErrorEventLog(int eventCode, Bundle bundle) {
-        if (!PLog.LOG_OPEN)
+        if (!PlayerLog.ENABLE)
             return;
         String value;
         switch (eventCode){
@@ -191,7 +191,7 @@ public class DebugLog {
         if(bundle!=null){
             value += "," + bundle.toString();
         }
-        PLog.e(EVENT_TAG_ERROR_EVENT, value);
+        PlayerLog.e(EVENT_TAG_ERROR_EVENT, value);
     }
 
 }

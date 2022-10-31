@@ -24,7 +24,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.player.IPlayer;
 
 import java.lang.ref.WeakReference;
@@ -106,7 +106,7 @@ public class RenderTextureView extends TextureView implements IRender {
 
     @Override
     public void updateVideoSize(int videoWidth, int videoHeight) {
-        PLog.d(TAG,"onUpdateVideoSize : videoWidth = " + videoWidth + " videoHeight = " + videoHeight);
+        PlayerLog.d(TAG,"onUpdateVideoSize : videoWidth = " + videoWidth + " videoHeight = " + videoHeight);
         mRenderMeasure.setVideoSize(videoWidth, videoHeight);
         requestLayout();
     }
@@ -119,13 +119,13 @@ public class RenderTextureView extends TextureView implements IRender {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        PLog.d(TAG,"onTextureViewAttachedToWindow");
+        PlayerLog.d(TAG,"onTextureViewAttachedToWindow");
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        PLog.d(TAG,"onTextureViewDetachedFromWindow");
+        PlayerLog.d(TAG,"onTextureViewDetachedFromWindow");
         //fixed bug on before android 4.4
         //modify 2018/11/16
         //java.lang.RuntimeException: Error during detachFromGLContext (see logcat for details)
@@ -204,7 +204,7 @@ public class RenderTextureView extends TextureView implements IRender {
                     //if SurfaceTexture not set or current is null, need set it.
                     if(!surfaceTexture.equals(useTexture)){
                         textureView.setSurfaceTexture(surfaceTexture);
-                        PLog.d("RenderTextureView","****setSurfaceTexture****");
+                        PlayerLog.d("RenderTextureView","****setSurfaceTexture****");
                     }else{
                         Surface surface = textureView.getSurface();
                         //release current Surface if not null.
@@ -217,7 +217,7 @@ public class RenderTextureView extends TextureView implements IRender {
                         player.setSurface(newSurface);
                         //record the new Surface
                         textureView.setSurface(newSurface);
-                        PLog.d("RenderTextureView","****bindSurface****");
+                        PlayerLog.d("RenderTextureView","****bindSurface****");
                     }
                 }else{
                     Surface surface = mSurfaceRefer.get();
@@ -225,7 +225,7 @@ public class RenderTextureView extends TextureView implements IRender {
                         player.setSurface(surface);
                         //record the Surface
                         textureView.setSurface(surface);
-                        PLog.d("RenderTextureView","****bindSurface****");
+                        PlayerLog.d("RenderTextureView","****bindSurface****");
                     }
                 }
             }
@@ -237,7 +237,7 @@ public class RenderTextureView extends TextureView implements IRender {
 
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-            PLog.d(TAG,"<---onSurfaceTextureAvailable---> : width = " + width + " height = " + height);
+            PlayerLog.d(TAG,"<---onSurfaceTextureAvailable---> : width = " + width + " height = " + height);
             if(mRenderCallback!=null){
                 mRenderCallback.onSurfaceCreated(
                         new InternalRenderHolder(RenderTextureView.this, surface), width, height);
@@ -246,7 +246,7 @@ public class RenderTextureView extends TextureView implements IRender {
 
         @Override
         public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-            PLog.d(TAG,"onSurfaceTextureSizeChanged : width = " + width + " height = " + height);
+            PlayerLog.d(TAG,"onSurfaceTextureSizeChanged : width = " + width + " height = " + height);
             if(mRenderCallback!=null){
                 mRenderCallback.onSurfaceChanged(
                         new InternalRenderHolder(RenderTextureView.this,surface), 0, width, height);
@@ -255,7 +255,7 @@ public class RenderTextureView extends TextureView implements IRender {
 
         @Override
         public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-            PLog.d(TAG,"***onSurfaceTextureDestroyed***");
+            PlayerLog.d(TAG,"***onSurfaceTextureDestroyed***");
             if(mRenderCallback!=null){
                 mRenderCallback.onSurfaceDestroy(
                         new InternalRenderHolder(RenderTextureView.this,surface));

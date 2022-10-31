@@ -28,7 +28,7 @@ import com.kk.taurus.playerbase.event.EventKey;
 import com.kk.taurus.playerbase.event.OnErrorEventListener;
 import com.kk.taurus.playerbase.event.OnPlayerEventListener;
 import com.kk.taurus.playerbase.extension.NetworkEventProducer;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.player.IPlayer;
 import com.kk.taurus.playerbase.provider.IDataProvider;
 import com.kk.taurus.playerbase.receiver.IReceiverGroup;
@@ -428,7 +428,7 @@ public final class RelationAssist implements AssistPlay {
         @Override
         public void onSurfaceCreated(IRender.IRenderHolder renderHolder,
                                      int width, int height) {
-            PLog.d(TAG,"onSurfaceCreated : width = " + width + ", height = " + height);
+            PlayerLog.d(TAG,"onSurfaceCreated : width = " + width + ", height = " + height);
             //on surface create ,try to attach player.
             mRenderHolder = renderHolder;
             bindRenderHolder(mRenderHolder);
@@ -440,7 +440,7 @@ public final class RelationAssist implements AssistPlay {
         }
         @Override
         public void onSurfaceDestroy(IRender.IRenderHolder renderHolder) {
-            PLog.d(TAG,"onSurfaceDestroy...");
+            PlayerLog.d(TAG,"onSurfaceDestroy...");
             //on surface destroy detach player
             mRenderHolder = null;
         }

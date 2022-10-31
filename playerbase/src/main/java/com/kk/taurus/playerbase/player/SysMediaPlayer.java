@@ -30,7 +30,7 @@ import android.view.SurfaceHolder;
 
 import com.kk.taurus.playerbase.config.AppContextAttach;
 import com.kk.taurus.playerbase.entity.TimedTextSource;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.entity.DataSource;
 import com.kk.taurus.playerbase.event.BundlePool;
 import com.kk.taurus.playerbase.event.EventKey;
@@ -191,10 +191,10 @@ public class SysMediaPlayer extends BaseInternalPlayer {
                     resume();
                 }
             }else{
-                PLog.e(TAG,"not support play speed setting.");
+                PlayerLog.e(TAG,"not support play speed setting.");
             }
         }catch (Exception e){
-            PLog.e(TAG,"IllegalStateException， if the internal player engine has not been initialized " +
+            PlayerLog.e(TAG,"IllegalStateException， if the internal player engine has not been initialized " +
                     "or has been released.");
         }
     }
@@ -397,7 +397,7 @@ public class SysMediaPlayer extends BaseInternalPlayer {
 
     MediaPlayer.OnPreparedListener mPreparedListener = new MediaPlayer.OnPreparedListener() {
         public void onPrepared(MediaPlayer mp) {
-            PLog.d(TAG,"onPrepared...");
+            PlayerLog.d(TAG,"onPrepared...");
             updateStatus(STATE_PREPARED);
 
             mVideoWidth = mp.getVideoWidth();
@@ -418,7 +418,7 @@ public class SysMediaPlayer extends BaseInternalPlayer {
 
             // We don't know the video size yet, but should start anyway.
             // The video size might be reported to us later.
-            PLog.d(TAG,"mTargetState = " + mTargetState);
+            PlayerLog.d(TAG,"mTargetState = " + mTargetState);
             if (mTargetState == STATE_STARTED) {
                 start();
             }else if(mTargetState == STATE_PAUSED){
@@ -449,10 +449,10 @@ public class SysMediaPlayer extends BaseInternalPlayer {
                     }
                 }
             }else{
-                PLog.e(TAG,"not support setting timed text source !");
+                PlayerLog.e(TAG,"not support setting timed text source !");
             }
         }catch (Exception e){
-            PLog.e(TAG,"addTimedTextSource error !");
+            PlayerLog.e(TAG,"addTimedTextSource error !");
             e.printStackTrace();
         }
     }
@@ -489,47 +489,47 @@ public class SysMediaPlayer extends BaseInternalPlayer {
                 public boolean onInfo(MediaPlayer mp, int arg1, int arg2) {
                     switch (arg1) {
                         case MediaPlayer.MEDIA_INFO_VIDEO_TRACK_LAGGING:
-                            PLog.d(TAG, "MEDIA_INFO_VIDEO_TRACK_LAGGING:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_VIDEO_TRACK_LAGGING:");
                             break;
                         case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START:
-                            PLog.d(TAG, "MEDIA_INFO_VIDEO_RENDERING_START");
+                            PlayerLog.d(TAG, "MEDIA_INFO_VIDEO_RENDERING_START");
                             startSeekPos = 0;
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_VIDEO_RENDER_START,null);
                             break;
                         case MediaPlayer.MEDIA_INFO_BUFFERING_START:
-                            PLog.d(TAG, "MEDIA_INFO_BUFFERING_START:" + arg2);
+                            PlayerLog.d(TAG, "MEDIA_INFO_BUFFERING_START:" + arg2);
                             Bundle bundle = BundlePool.obtain();
                             bundle.putLong(EventKey.LONG_DATA, mBandWidth);
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_BUFFERING_START,bundle);
                             break;
                         case MediaPlayer.MEDIA_INFO_BUFFERING_END:
-                            PLog.d(TAG, "MEDIA_INFO_BUFFERING_END:" + arg2);
+                            PlayerLog.d(TAG, "MEDIA_INFO_BUFFERING_END:" + arg2);
                             Bundle bundle1 = BundlePool.obtain();
                             bundle1.putLong(EventKey.LONG_DATA, mBandWidth);
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_BUFFERING_END,bundle1);
                             break;
                         case MediaPlayer.MEDIA_INFO_BAD_INTERLEAVING:
-                            PLog.d(TAG, "MEDIA_INFO_BAD_INTERLEAVING:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_BAD_INTERLEAVING:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_BAD_INTERLEAVING,null);
                             break;
                         case MediaPlayer.MEDIA_INFO_NOT_SEEKABLE:
-                            PLog.d(TAG, "MEDIA_INFO_NOT_SEEKABLE:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_NOT_SEEKABLE:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_NOT_SEEK_ABLE,null);
                             break;
                         case MediaPlayer.MEDIA_INFO_METADATA_UPDATE:
-                            PLog.d(TAG, "MEDIA_INFO_METADATA_UPDATE:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_METADATA_UPDATE:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_METADATA_UPDATE,null);
                             break;
                         case MediaPlayer.MEDIA_INFO_UNSUPPORTED_SUBTITLE:
-                            PLog.d(TAG, "MEDIA_INFO_UNSUPPORTED_SUBTITLE:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_UNSUPPORTED_SUBTITLE:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_UNSUPPORTED_SUBTITLE,null);
                             break;
                         case MediaPlayer.MEDIA_INFO_SUBTITLE_TIMED_OUT:
-                            PLog.d(TAG, "MEDIA_INFO_SUBTITLE_TIMED_OUT:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_SUBTITLE_TIMED_OUT:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_SUBTITLE_TIMED_OUT,null);
                             break;
                         case MEDIA_INFO_NETWORK_BANDWIDTH:
-                            PLog.d(TAG,"band_width : " + arg2);
+                            PlayerLog.d(TAG,"band_width : " + arg2);
                             mBandWidth = arg2 * 1000;
                             break;
                     }
@@ -540,7 +540,7 @@ public class SysMediaPlayer extends BaseInternalPlayer {
     private MediaPlayer.OnSeekCompleteListener mOnSeekCompleteListener = new MediaPlayer.OnSeekCompleteListener() {
         @Override
         public void onSeekComplete(MediaPlayer mp) {
-            PLog.d(TAG,"EVENT_CODE_SEEK_COMPLETE");
+            PlayerLog.d(TAG,"EVENT_CODE_SEEK_COMPLETE");
             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_SEEK_COMPLETE,null);
         }
     };
@@ -548,7 +548,7 @@ public class SysMediaPlayer extends BaseInternalPlayer {
     private MediaPlayer.OnErrorListener mErrorListener =
             new MediaPlayer.OnErrorListener() {
                 public boolean onError(MediaPlayer mp, int framework_err, int impl_err) {
-                    PLog.d(TAG, "Error: " + framework_err + "," + impl_err);
+                    PlayerLog.d(TAG, "Error: " + framework_err + "," + impl_err);
                     updateStatus(STATE_ERROR);
                     mTargetState = STATE_ERROR;
 

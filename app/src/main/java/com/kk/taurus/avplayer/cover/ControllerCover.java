@@ -21,7 +21,7 @@ import com.kk.taurus.playerbase.entity.DataSource;
 import com.kk.taurus.playerbase.event.BundlePool;
 import com.kk.taurus.playerbase.event.EventKey;
 import com.kk.taurus.playerbase.event.OnPlayerEventListener;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.player.IPlayer;
 import com.kk.taurus.playerbase.player.OnTimerUpdateListener;
 import com.kk.taurus.playerbase.receiver.IReceiverGroup;
@@ -75,7 +75,7 @@ public class ControllerCover extends BaseCover implements OnTimerUpdateListener,
             super.handleMessage(msg);
             switch (msg.what){
                 case MSG_CODE_DELAY_HIDDEN_CONTROLLER:
-                    PLog.d(getTag().toString(), "msg_delay_hidden...");
+                    PlayerLog.d(getTag().toString(), "msg_delay_hidden...");
                     setControllerState(false);
                     break;
             }

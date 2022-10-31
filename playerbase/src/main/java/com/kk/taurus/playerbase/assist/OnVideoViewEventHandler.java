@@ -20,7 +20,7 @@ import android.os.Bundle;
 
 import com.kk.taurus.playerbase.entity.DataSource;
 import com.kk.taurus.playerbase.event.EventKey;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.player.IPlayer;
 import com.kk.taurus.playerbase.widget.BaseVideoView;
 
@@ -85,7 +85,7 @@ public class OnVideoViewEventHandler extends BaseEventAssistHandler<BaseVideoVie
         if(bundle!=null){
             DataSource data = (DataSource) bundle.getSerializable(EventKey.SERIALIZABLE_DATA);
             if(data==null){
-                PLog.e("OnVideoViewEventHandler","requestPlayDataSource need legal data source");
+                PlayerLog.e("OnVideoViewEventHandler","requestPlayDataSource need legal data source");
                 return;
             }
             assist.stop();

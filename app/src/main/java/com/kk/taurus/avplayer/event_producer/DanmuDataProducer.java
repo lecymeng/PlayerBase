@@ -14,7 +14,7 @@ import com.kk.taurus.playerbase.event.EventKey;
 import com.kk.taurus.playerbase.event.OnPlayerEventListener;
 import com.kk.taurus.playerbase.extension.BaseEventProducer;
 import com.kk.taurus.playerbase.extension.EventCallback;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 import java.util.Random;
 
@@ -49,7 +49,7 @@ public class DanmuDataProducer extends BaseEventProducer {
                         obtain.putInt(EventKey.INT_DATA, mCurrStartMs + (new Random().nextInt(10)*1000));
                         obtain.putString(EventKey.STRING_DATA, RandomUtils.getRandomLowerLetterStr(RandomUtils.getRandomInt(3,20)));
                         getSender().sendEvent(DataInter.ProducerEvent.ADD_DANMU_DATA, obtain);
-                        PLog.d("DanmuTest_Send", obtain.toString());
+                        PlayerLog.d("DanmuTest_Send", obtain.toString());
                     }
                     mCurrStartMs += LOAD_DANMU_DATA_PERIOD;
                     mHandler.sendEmptyMessageDelayed(MSG_LOAD_DANMU_DATA, LOAD_DANMU_DATA_PERIOD);

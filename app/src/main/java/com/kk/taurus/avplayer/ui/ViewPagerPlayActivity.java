@@ -17,7 +17,7 @@ import com.kk.taurus.playerbase.assist.RelationAssist;
 import com.kk.taurus.playerbase.entity.DataSource;
 import com.kk.taurus.playerbase.event.EventKey;
 import com.kk.taurus.playerbase.event.OnPlayerEventListener;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.permissionx.guolindev.PermissionX;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class ViewPagerPlayActivity extends AppCompatActivity {
         mRelationAssist.setOnPlayerEventListener((eventCode, bundle) -> {
             if (eventCode == OnPlayerEventListener.PLAYER_EVENT_ON_TIMER_UPDATE) {
                 if (bundle != null) {
-                    PLog.d("timerUpdate", "curr = " + bundle.getInt(EventKey.INT_ARG1) + ",duration = " + bundle.getInt(EventKey.INT_ARG2));
+                    PlayerLog.d("timerUpdate", "curr = " + bundle.getInt(EventKey.INT_ARG1) + ",duration = " + bundle.getInt(EventKey.INT_ARG2));
                 }
             }
         });

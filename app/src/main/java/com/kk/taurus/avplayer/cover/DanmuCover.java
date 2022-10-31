@@ -10,7 +10,7 @@ import com.kk.taurus.avplayer.R;
 import com.kk.taurus.avplayer.play.DataInter;
 import com.kk.taurus.playerbase.event.EventKey;
 import com.kk.taurus.playerbase.event.OnPlayerEventListener;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.receiver.BaseCover;
 
 import java.util.HashMap;
@@ -133,7 +133,7 @@ public class DanmuCover extends BaseCover {
     public void onProducerEvent(int eventCode, Bundle bundle) {
         super.onProducerEvent(eventCode, bundle);
         if(eventCode == DataInter.ProducerEvent.ADD_DANMU_DATA){
-            PLog.d("DanmuTest_Receive", bundle.toString());
+            PlayerLog.d("DanmuTest_Receive", bundle.toString());
             int position = bundle.getInt(EventKey.INT_DATA);
             String text = bundle.getString(EventKey.STRING_DATA);
             addDanmaku(false, position, text);

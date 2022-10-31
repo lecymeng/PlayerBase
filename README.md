@@ -1,13 +1,16 @@
 ![image](https://github.com/jiajunhui/PlayerBase/raw/master/screenshot/playerbase_top_slogen.png)
 
-#### PlayerBase-Core 
-[ ![Download](https://api.bintray.com/packages/taurus/Tools/PlayerBase/images/download.svg) ](https://bintray.com/taurus/Tools/PlayerBase/_latestVersion)[![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
+## PlayerBase
 
-#### ExoPlayerPkg 
-[ ![Download](https://api.bintray.com/packages/taurus/Tools/exoplayer/images/download.svg) ](https://bintray.com/taurus/Tools/exoplayer/_latestVersion)[![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
+### PlayerBase-Core
 
-#### IjkPlayerPkg 
-[ ![Download](https://api.bintray.com/packages/taurus/Tools/ijkplayer/images/download.svg) ](https://bintray.com/taurus/Tools/ijkplayer/_latestVersion)[![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
+![maven-central PlayerBase-Core ](https://img.shields.io/maven-central/v/com.weicools/player-base.svg)
+
+### PlayerBase-IjkPlayer
+
+![maven-central PlayerBase-IjkPlayer ](https://img.shields.io/maven-central/v/com.weicools/player-base.svg)
+
+## introduction
 
 **博文地址** ：[Android播放器基础封装库PlayerBase](https://juejin.im/post/5b0d4e6bf265da090f7376d2)
 
@@ -19,146 +22,104 @@
 
 ### [Demo下载](http://d.firim.info/lmhz)
 
-### 使用及依赖-已适配AndroidX
+## 使用及依赖
 
-需要的权限，如果targetSDK版本在Android M以上的，请注意运行时权限的处理。<br>
+### 请求的权限
+
+如果需要监听网络状态，则需要添加权限：
 
 ```xml
-<uses-permission android:name="android.permission.INTERNET"/>
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
 
-#### 只使用MediaPlayer
+### 集成
 
-```gradle
-dependencies {
-  
-  //该依赖仅包含MediaPlayer解码
-  implementation 'com.kk.taurus.playerbase:playerbase:3.4.2'
-  
-}
-```
+#### 使用 MediaPlayer + ExoPlayer
 
-#### 使用ExoPlayer + MediaPlayer
-
-```gradle
-dependencies {
- 
-  //该依赖包含exoplayer解码和MediaPlayer解码
-  //注意exoplayer的最小支持SDK版本为16
-  implementation 'cn.jiajunhui:exoplayer:342_2132_019'
-  
-}
-```
-
-#### 使用ijkplayer + MediaPlayer
-
-```gradle
-dependencies {
-  
-  //该依赖包含ijkplayer解码和MediaPlayer解码
-  implementation 'cn.jiajunhui:ijkplayer:342_088_012'
-  //ijk官方的解码库依赖，较少格式版本且不支持HTTPS。
-  implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
-  # Other ABIs: optional
-  implementation 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.8'
-  implementation 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
-  implementation 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.8'
-  implementation 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.8.8'
-  
-}
-```
-
-#### 使用ijkplayer + ExoPlayer + MediaPlayer
-
-```gradle
-dependencies {
-  
-  //该依赖包含exoplayer解码和MediaPlayer解码
-  //注意exoplayer的最小支持SDK版本为16
-  implementation 'cn.jiajunhui:exoplayer:342_2132_019'
-
-  //该依赖包含ijkplayer解码和MediaPlayer解码
-  implementation 'cn.jiajunhui:ijkplayer:342_088_012'
-  //ijk官方的解码库依赖，较少格式版本且不支持HTTPS。
-  implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
-  # Other ABIs: optional
-  implementation 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.8'
-  implementation 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
-  implementation 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.8'
-  implementation 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.8.8'
-  
-}
-```
-
-如果您添加依赖exoplayer的库，需要在gradle中增加如下配置。
-```gradle
+```groovy
 buildTypes {
-
-    //...
-    
-    compileOptions{
+    // ExoPlayer require Java8
+    compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
+dependencies {
+    // 包含 ExoPlayer & MediaPlayer 解码
+    implementation "com.weicools:player-base:3.5.0"
+}
 ```
 
-代码混淆时，请在proguard中添加如下保护<br>
+#### 使用 MediaPlayer + ExoPlayer + IjkPlayer
 
-```proguard
--keep public class * extends android.view.View{*;}
+```groovy
+buildTypes {
+    // ExoPlayer require Java8
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
 
--keep public class * implements com.kk.taurus.playerbase.player.IPlayer{*;}
-
+dependencies {
+    implementation "com.weicools:player-base:3.5.0"
+    implementation "com.weicools:player-ijkplayer:3.5.0"
+    // ijk 官方的解码库依赖，较少格式版本且不支持 HTTPS
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
+    // Other ABIs: optional
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.8.8'
+}
 ```
 
-**初始化**
+### 使用
+
+#### 初始化
 
 ```java
 public class App extends Application {
 
     @Override
     public void onCreate() {
-        //...
-        
-        //如果您想使用默认的网络状态事件生产者，请添加此行配置。
-        //并需要添加权限 android.permission.ACCESS_NETWORK_STATE
-        PlayerConfig.setUseDefaultNetworkEventProducer(true);
-        //初始化库
+
+        // Default plan id = 0 // Decoder = MediaPlayer
+        PlayerConfig.addDecoderPlan(new DecoderPlan(PLAN_ID_EXO, ExoMediaPlayer.class.getName(), "ExoPlayer"));
+        PlayerConfig.addDecoderPlan(new DecoderPlan(PLAN_ID_IJK, IjkPlayer.class.getName(), "IjkPlayer")); // if add ijk libs
+        PlayerConfig.setDefaultPlanId(0); // Use MediaPlayer
+        // PlayerConfig.setDefaultPlanId(PLAN_ID_EXO); // Use ExoPlayer
+        // PlayerConfig.setDefaultPlanId(PLAN_ID_IJK); // Use IjkPlayer
         PlayerLibrary.init(this);
-        
-        //-------------------------------------------
-        
-        //如果添加了'cn.jiajunhui:exoplayer:xxxx'该依赖
-        ExoMediaPlayer.init(this);
-        
-        //如果添加了'cn.jiajunhui:ijkplayer:xxxx'该依赖
-        IjkPlayer.init(this);
-        
-        
-        //播放记录的配置
-        //开启播放记录
+
+        // 下面的初始化方式可以简化解码器相关设置
+        // ExoMediaPlayer.init(this);
+        // IjkPlayer.init(this); // if add ijk libs
+
+        // 如果您想使用默认的网络状态事件生产者，请添加此行配置。
+        // 并需要添加权限 android.permission.ACCESS_NETWORK_STATE
+        // PlayerConfig.setUseDefaultNetworkEventProducer(true);
+
+        // 开启播放记录
         PlayerConfig.playRecord(true);
-        PlayRecordManager.setRecordConfig(
-                        new PlayRecordManager.RecordConfig.Builder()
-                                .setMaxRecordCount(100)
-                                //.setRecordKeyProvider()
-                                //.setOnRecordCallBack()
-                                .build());
-        
+        PlayRecordManager.RecordConfig recordConfig = new PlayRecordManager.RecordConfig.Builder()
+                .setMaxRecordCount(100)
+                .build();
+        PlayRecordManager.setRecordConfig(recordConfig);
     }
-    
 }
 ```
 
-### 交流
+## 交流
+
 联系方式：junhui_jia@163.com
 
 QQ群：600201778
 
 <img src="https://github.com/jiajunhui/PlayerBase/raw/master/screenshot/qrcode_qq_group.jpg" width="270" height="370">
 
-### License
+## License
+
 ```license
 Copyright 2017 jiajunhui<junhui_jia@163.com>
 

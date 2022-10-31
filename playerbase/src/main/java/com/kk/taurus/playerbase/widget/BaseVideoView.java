@@ -37,7 +37,7 @@ import com.kk.taurus.playerbase.event.EventKey;
 import com.kk.taurus.playerbase.event.OnErrorEventListener;
 import com.kk.taurus.playerbase.event.OnPlayerEventListener;
 import com.kk.taurus.playerbase.extension.NetworkEventProducer;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.player.IPlayer;
 import com.kk.taurus.playerbase.provider.IDataProvider;
 import com.kk.taurus.playerbase.receiver.IReceiverGroup;
@@ -208,7 +208,7 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
     }
 
     private void requestAudioFocus(){
-        PLog.d(TAG,">>requestAudioFocus<<");
+        PlayerLog.d(TAG,">>requestAudioFocus<<");
         AudioManager am = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
         if(am!=null){
             am.requestAudioFocus(null, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
@@ -216,7 +216,7 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
     }
 
     private void releaseAudioFocus(){
-        PLog.d(TAG,"<<releaseAudioFocus>>");
+        PlayerLog.d(TAG,"<<releaseAudioFocus>>");
         AudioManager am = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
         if(am!=null){
             am.abandonAudioFocus(null);
@@ -464,7 +464,7 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
 
     @Override
     public void stopPlayback() {
-        PLog.e(TAG,"stopPlayback release.");
+        PlayerLog.e(TAG,"stopPlayback release.");
         releaseAudioFocus();
         mPlayer.destroy();
         mRenderHolder = null;
@@ -496,7 +496,7 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
                         mVideoHeight = bundle.getInt(EventKey.INT_ARG2);
                         mVideoSarNum = bundle.getInt(EventKey.INT_ARG3);
                         mVideoSarDen = bundle.getInt(EventKey.INT_ARG4);
-                        PLog.d(TAG,"onVideoSizeChange : videoWidth = " + mVideoWidth
+                        PlayerLog.d(TAG,"onVideoSizeChange : videoWidth = " + mVideoWidth
                                 + ", videoHeight = " + mVideoHeight
                                 + ", videoSarNum = " + mVideoSarNum
                                 + ", videoSarDen = " + mVideoSarDen);
@@ -513,7 +513,7 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
                     if(bundle!=null){
                         //if rotation change need update render.
                         mVideoRotation = bundle.getInt(EventKey.INT_DATA);
-                        PLog.d(TAG,"onVideoRotationChange : videoRotation = " + mVideoRotation);
+                        PlayerLog.d(TAG,"onVideoRotationChange : videoRotation = " + mVideoRotation);
                         if(mRender!=null)
                             mRender.setVideoRotation(mVideoRotation);
                     }
@@ -545,7 +545,7 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
             new OnErrorEventListener() {
         @Override
         public void onErrorEvent(int eventCode, Bundle bundle) {
-            PLog.e(TAG,"onError : code = " + eventCode
+            PlayerLog.e(TAG,"onError : code = " + eventCode
                     + ", Message = " + (bundle==null?"no message":bundle.toString()));
             if(mOnErrorEventListener!=null)
                 mOnErrorEventListener.onErrorEvent(eventCode, bundle);
@@ -563,7 +563,7 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
     private IRender.IRenderCallback mRenderCallback = new IRender.IRenderCallback() {
         @Override
         public void onSurfaceCreated(IRender.IRenderHolder renderHolder, int width, int height) {
-            PLog.d(TAG,"onSurfaceCreated : width = " + width + ", height = " + height);
+            PlayerLog.d(TAG,"onSurfaceCreated : width = " + width + ", height = " + height);
             //on surface create ,try to attach player.
             mRenderHolder = renderHolder;
             bindRenderHolder(mRenderHolder);
@@ -575,7 +575,7 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
         }
         @Override
         public void onSurfaceDestroy(IRender.IRenderHolder renderHolder) {
-            PLog.d(TAG,"onSurfaceDestroy...");
+            PlayerLog.d(TAG,"onSurfaceDestroy...");
             //on surface destroy detach player
             mRenderHolder = null;
         }

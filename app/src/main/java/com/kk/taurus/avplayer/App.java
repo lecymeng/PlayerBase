@@ -7,7 +7,7 @@ import com.kk.taurus.ijkplayer.IjkPlayer;
 import com.kk.taurus.playerbase.config.PlayerConfig;
 import com.kk.taurus.playerbase.config.PlayerLibrary;
 import com.kk.taurus.playerbase.entity.DecoderPlan;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.record.PlayRecordManager;
 
 /**
@@ -23,7 +23,7 @@ public class App extends Application {
 
     public static boolean ignoreMobile;
 
-    public static App get(){
+    public static App get() {
         return instance;
     }
 
@@ -31,22 +31,28 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        PLog.LOG_OPEN = true;
 
-        PlayerConfig.addDecoderPlan(new DecoderPlan(PLAN_ID_IJK, IjkPlayer.class.getName(), "IjkPlayer"));
+        PlayerLog.ENABLE = true;
+
+        // Default plan id = 0 // Decoder = MediaPlayer
         PlayerConfig.addDecoderPlan(new DecoderPlan(PLAN_ID_EXO, ExoMediaPlayer.class.getName(), "ExoPlayer"));
-        PlayerConfig.setDefaultPlanId(PLAN_ID_EXO);
+        PlayerConfig.addDecoderPlan(new DecoderPlan(PLAN_ID_IJK, IjkPlayer.class.getName(), "IjkPlayer")); // if add ijk libs
+        PlayerConfig.setDefaultPlanId(0); // Use MediaPlayer
+        // PlayerConfig.setDefaultPlanId(PLAN_ID_EXO); // Use ExoPlayer
+        // PlayerConfig.setDefaultPlanId(PLAN_ID_IJK); // Use IjkPlayer
+        PlayerLibrary.init(this);
 
-        //use default NetworkEventProducer.
+        // 下面的初始化方式可以简化解码器相关设置
+        // ExoMediaPlayer.init(this);
+        // IjkPlayer.init(this);
+
+        // use default NetworkEventProducer.
         // PlayerConfig.setUseDefaultNetworkEventProducer(true);
 
         PlayerConfig.playRecord(true);
-
-        PlayRecordManager.setRecordConfig(
-                new PlayRecordManager.RecordConfig.Builder()
-                        .setMaxRecordCount(100).build());
-
-        PlayerLibrary.init(this);
+        PlayRecordManager.RecordConfig recordConfig = new PlayRecordManager.RecordConfig.Builder()
+                .setMaxRecordCount(100)
+                .build();
+        PlayRecordManager.setRecordConfig(recordConfig);
     }
-
 }

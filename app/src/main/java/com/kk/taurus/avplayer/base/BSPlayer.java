@@ -7,7 +7,7 @@ import com.kk.taurus.playerbase.assist.RelationAssist;
 import com.kk.taurus.playerbase.entity.DataSource;
 import com.kk.taurus.playerbase.event.OnErrorEventListener;
 import com.kk.taurus.playerbase.event.OnPlayerEventListener;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.player.IPlayer;
 import com.kk.taurus.playerbase.provider.IDataProvider;
 import com.kk.taurus.playerbase.receiver.GroupValue;
@@ -220,7 +220,7 @@ public abstract class BSPlayer implements ISPayer {
     @Override
     public boolean isInPlaybackState(){
         int state = getState();
-        PLog.d("BSPlayer","isInPlaybackState : state = " + state);
+        PlayerLog.d("BSPlayer","isInPlaybackState : state = " + state);
         return state!= IPlayer.STATE_END
                 && state!= IPlayer.STATE_ERROR
                 && state!= IPlayer.STATE_IDLE

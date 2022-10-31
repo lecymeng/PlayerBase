@@ -23,7 +23,7 @@ import com.kk.taurus.playerbase.entity.DataSource;
 import com.kk.taurus.playerbase.event.EventKey;
 import com.kk.taurus.playerbase.event.OnErrorEventListener;
 import com.kk.taurus.playerbase.event.OnPlayerEventListener;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 /**
  * 音乐播放示例
@@ -106,17 +106,17 @@ public class MusicPlayActivity extends AppCompatActivity implements OnPlayerEven
 
     @Override
     public void onPlayerEvent(int eventCode, Bundle bundle) {
-        PLog.d("MusicPlayActivity", eventCode + "");
+        PlayerLog.d("MusicPlayActivity", eventCode + "");
         switch (eventCode){
             case OnPlayerEventListener.PLAYER_EVENT_ON_PREPARED:
                 mSeekBar.setMax(mPlayer.getDuration());
                 break;
             case OnPlayerEventListener.PLAYER_EVENT_ON_START:
-                PLog.d("MusicPlayActivity", "showLoading...");
+                PlayerLog.d("MusicPlayActivity", "showLoading...");
                 break;
             case OnPlayerEventListener.PLAYER_EVENT_ON_AUDIO_RENDER_START:
             case OnPlayerEventListener.PLAYER_EVENT_ON_BUFFERING_END:
-                PLog.d("MusicPlayActivity", "hiddenLoading...");
+                PlayerLog.d("MusicPlayActivity", "hiddenLoading...");
                 break;
             case OnPlayerEventListener.PLAYER_EVENT_ON_TIMER_UPDATE:
                 if(bundle!=null){

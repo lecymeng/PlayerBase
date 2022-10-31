@@ -27,7 +27,7 @@ import android.os.Message;
 import androidx.annotation.NonNull;
 
 import com.kk.taurus.playerbase.assist.InterKey;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.utils.NetworkUtils;
 
 import java.lang.ref.WeakReference;
@@ -65,7 +65,7 @@ public class NetworkEventProducer extends BaseEventProducer {
                 ReceiverEventSender sender = getSender();
                 if (sender != null) {
                     sender.sendInt(InterKey.KEY_NETWORK_STATE, mState);
-                    PLog.d(TAG, "onNetworkChange : " + mState);
+                    PlayerLog.d(TAG, "onNetworkChange : " + mState);
                 }
             }
         }

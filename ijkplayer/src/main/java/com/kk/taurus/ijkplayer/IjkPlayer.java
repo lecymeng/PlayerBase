@@ -21,7 +21,7 @@ import com.kk.taurus.playerbase.event.BundlePool;
 import com.kk.taurus.playerbase.event.EventKey;
 import com.kk.taurus.playerbase.event.OnErrorEventListener;
 import com.kk.taurus.playerbase.event.OnPlayerEventListener;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.player.BaseInternalPlayer;
 
 import java.util.HashMap;
@@ -149,7 +149,7 @@ public class IjkPlayer extends BaseInternalPlayer {
             updateStatus(STATE_INITIALIZED);
 
             if(dataSource.getTimedTextSource()!=null){
-                PLog.e(TAG,"ijkplayer not support timed text !");
+                PlayerLog.e(TAG,"ijkplayer not support timed text !");
             }
 
             Context applicationContext = AppContextAttach.getApplicationContext();
@@ -213,7 +213,7 @@ public class IjkPlayer extends BaseInternalPlayer {
             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_START, null);
         }
         mTargetState = STATE_STARTED;
-        PLog.d(TAG,"start...");
+        PlayerLog.d(TAG,"start...");
     }
 
     @Override
@@ -431,7 +431,7 @@ public class IjkPlayer extends BaseInternalPlayer {
 
     IMediaPlayer.OnPreparedListener mPreparedListener = new IMediaPlayer.OnPreparedListener() {
         public void onPrepared(IMediaPlayer mp) {
-            PLog.d(TAG,"onPrepared...");
+            PlayerLog.d(TAG,"onPrepared...");
             updateStatus(STATE_PREPARED);
 
             mVideoWidth = mp.getVideoWidth();
@@ -451,7 +451,7 @@ public class IjkPlayer extends BaseInternalPlayer {
 
             // We don't know the video size yet, but should start anyway.
             // The video size might be reported to us later.
-            PLog.d(TAG,"mTargetState = " + mTargetState);
+            PlayerLog.d(TAG,"mTargetState = " + mTargetState);
             if (mTargetState == STATE_STARTED) {
                 start();
             }else if(mTargetState == STATE_PAUSED){
@@ -496,64 +496,64 @@ public class IjkPlayer extends BaseInternalPlayer {
                 public boolean onInfo(IMediaPlayer mp, int arg1, int arg2) {
                     switch (arg1) {
                         case IMediaPlayer.MEDIA_INFO_VIDEO_TRACK_LAGGING:
-                            PLog.d(TAG, "MEDIA_INFO_VIDEO_TRACK_LAGGING:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_VIDEO_TRACK_LAGGING:");
                             break;
                         case IMediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START:
-                            PLog.d(TAG, "MEDIA_INFO_VIDEO_RENDERING_START");
+                            PlayerLog.d(TAG, "MEDIA_INFO_VIDEO_RENDERING_START");
                             startSeekPos = 0;
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_VIDEO_RENDER_START,null);
                             break;
                         case IMediaPlayer.MEDIA_INFO_BUFFERING_START:
-                            PLog.d(TAG, "MEDIA_INFO_BUFFERING_START:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_BUFFERING_START:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_BUFFERING_START,null);
                             break;
                         case IMediaPlayer.MEDIA_INFO_BUFFERING_END:
-                            PLog.d(TAG, "MEDIA_INFO_BUFFERING_END:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_BUFFERING_END:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_BUFFERING_END,null);
                             break;
                         case IMediaPlayer.MEDIA_INFO_NETWORK_BANDWIDTH:
                             //not support
                             break;
                         case IMediaPlayer.MEDIA_INFO_BAD_INTERLEAVING:
-                            PLog.d(TAG, "MEDIA_INFO_BAD_INTERLEAVING:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_BAD_INTERLEAVING:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_BAD_INTERLEAVING,null);
                             break;
                         case IMediaPlayer.MEDIA_INFO_NOT_SEEKABLE:
-                            PLog.d(TAG, "MEDIA_INFO_NOT_SEEKABLE:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_NOT_SEEKABLE:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_NOT_SEEK_ABLE,null);
                             break;
                         case IMediaPlayer.MEDIA_INFO_METADATA_UPDATE:
-                            PLog.d(TAG, "MEDIA_INFO_METADATA_UPDATE:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_METADATA_UPDATE:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_METADATA_UPDATE,null);
                             break;
                         case IMediaPlayer.MEDIA_INFO_TIMED_TEXT_ERROR:
-                            PLog.d(TAG, "MEDIA_INFO_TIMED_TEXT_ERROR:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_TIMED_TEXT_ERROR:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_TIMED_TEXT_ERROR,null);
                             break;
                         case IMediaPlayer.MEDIA_INFO_UNSUPPORTED_SUBTITLE:
-                            PLog.d(TAG, "MEDIA_INFO_UNSUPPORTED_SUBTITLE:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_UNSUPPORTED_SUBTITLE:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_UNSUPPORTED_SUBTITLE,null);
                             break;
                         case IMediaPlayer.MEDIA_INFO_SUBTITLE_TIMED_OUT:
-                            PLog.d(TAG, "MEDIA_INFO_SUBTITLE_TIMED_OUT:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_SUBTITLE_TIMED_OUT:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_SUBTITLE_TIMED_OUT,null);
                             break;
                         case IMediaPlayer.MEDIA_INFO_VIDEO_ROTATION_CHANGED:
-                            PLog.d(TAG, "MEDIA_INFO_VIDEO_ROTATION_CHANGED: " + arg2);
+                            PlayerLog.d(TAG, "MEDIA_INFO_VIDEO_ROTATION_CHANGED: " + arg2);
                             Bundle bundle = BundlePool.obtain();
                             bundle.putInt(EventKey.INT_DATA,arg2);
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_VIDEO_ROTATION_CHANGED,bundle);
                             break;
                         case IMediaPlayer.MEDIA_INFO_AUDIO_RENDERING_START:
-                            PLog.d(TAG, "MEDIA_INFO_AUDIO_RENDERING_START:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_AUDIO_RENDERING_START:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_AUDIO_RENDER_START,null);
                             break;
                         case IMediaPlayer.MEDIA_INFO_AUDIO_DECODED_START:
-                            PLog.d(TAG, "MEDIA_INFO_AUDIO_DECODED_START:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_AUDIO_DECODED_START:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_AUDIO_DECODER_START,null);
                             break;
                         case IMediaPlayer.MEDIA_INFO_AUDIO_SEEK_RENDERING_START:
-                            PLog.d(TAG, "MEDIA_INFO_AUDIO_SEEK_RENDERING_START:");
+                            PlayerLog.d(TAG, "MEDIA_INFO_AUDIO_SEEK_RENDERING_START:");
                             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_AUDIO_SEEK_RENDERING_START,null);
                             break;
                     }
@@ -564,7 +564,7 @@ public class IjkPlayer extends BaseInternalPlayer {
     private IMediaPlayer.OnSeekCompleteListener mOnSeekCompleteListener = new IMediaPlayer.OnSeekCompleteListener() {
         @Override
         public void onSeekComplete(IMediaPlayer mp) {
-            PLog.d(TAG,"EVENT_CODE_SEEK_COMPLETE");
+            PlayerLog.d(TAG,"EVENT_CODE_SEEK_COMPLETE");
             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_SEEK_COMPLETE,null);
         }
     };
@@ -572,7 +572,7 @@ public class IjkPlayer extends BaseInternalPlayer {
     private IMediaPlayer.OnErrorListener mErrorListener =
             new IMediaPlayer.OnErrorListener() {
                 public boolean onError(IMediaPlayer mp, int framework_err, int impl_err) {
-                    PLog.d(TAG, "Error: " + framework_err + "," + impl_err);
+                    PlayerLog.d(TAG, "Error: " + framework_err + "," + impl_err);
                     updateStatus(STATE_ERROR);
                     mTargetState = STATE_ERROR;
 

@@ -63,7 +63,7 @@ import com.kk.taurus.playerbase.event.BundlePool;
 import com.kk.taurus.playerbase.event.EventKey;
 import com.kk.taurus.playerbase.event.OnErrorEventListener;
 import com.kk.taurus.playerbase.event.OnPlayerEventListener;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.player.BaseInternalPlayer;
 import com.kk.taurus.playerbase.player.IPlayer;
 
@@ -389,7 +389,7 @@ public class ExoMediaPlayer extends BaseInternalPlayer {
     private final Player.Listener mPlayerListener = new Player.Listener() {
         @Override
         public void onVideoSizeChanged(VideoSize videoSize) {
-            PLog.d(TAG, "onVideoSizeChanged : width = " + videoSize.width + ", height = " + videoSize.height + ", rotation = " + videoSize.unappliedRotationDegrees);
+            PlayerLog.d(TAG, "onVideoSizeChanged : width = " + videoSize.width + ", height = " + videoSize.height + ", rotation = " + videoSize.unappliedRotationDegrees);
             mVideoWidth = videoSize.width;
             mVideoHeight = videoSize.height;
             Bundle bundle = BundlePool.obtain();
@@ -402,7 +402,7 @@ public class ExoMediaPlayer extends BaseInternalPlayer {
 
         @Override
         public void onRenderedFirstFrame() {
-            PLog.d(TAG, "onRenderedFirstFrame:");
+            PlayerLog.d(TAG, "onRenderedFirstFrame:");
             updateStatus(IPlayer.STATE_STARTED);
             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_VIDEO_RENDER_START, null);
         }
@@ -413,12 +413,12 @@ public class ExoMediaPlayer extends BaseInternalPlayer {
             if (!isLoading) {
                 submitBufferingUpdate(bufferPercentage, null);
             }
-            PLog.d(TAG, "onLoadingChanged: " + isLoading + ", bufferPercentage = " + bufferPercentage);
+            PlayerLog.d(TAG, "onLoadingChanged: " + isLoading + ", bufferPercentage = " + bufferPercentage);
         }
 
         @Override
         public void onPlaybackStateChanged(int playbackState) {
-            PLog.d(TAG, "onPlayerStateChanged: playbackState = " + playbackState);
+            PlayerLog.d(TAG, "onPlayerStateChanged: playbackState = " + playbackState);
             if (isPreparing) {
                 if (playbackState == Player.STATE_READY) {
                     isPreparing = false;
@@ -436,7 +436,7 @@ public class ExoMediaPlayer extends BaseInternalPlayer {
                     case Player.STATE_READY:
                     case Player.STATE_ENDED:
                         long bitrateEstimate = mBandwidthMeter.getBitrateEstimate();
-                        PLog.d(TAG, "buffer_end, BandWidth : " + bitrateEstimate);
+                        PlayerLog.d(TAG, "buffer_end, BandWidth : " + bitrateEstimate);
                         isBuffering = false;
                         Bundle bundle = BundlePool.obtain();
                         bundle.putLong(EventKey.LONG_DATA, bitrateEstimate);
@@ -459,7 +459,7 @@ public class ExoMediaPlayer extends BaseInternalPlayer {
                 switch (playbackState) {
                     case Player.STATE_BUFFERING:
                         long bitrateEstimate = mBandwidthMeter.getBitrateEstimate();
-                        PLog.d(TAG, "buffer_start, BandWidth: " + bitrateEstimate);
+                        PlayerLog.d(TAG, "buffer_start, BandWidth: " + bitrateEstimate);
                         isBuffering = true;
                         Bundle bundle = BundlePool.obtain();
                         bundle.putLong(EventKey.LONG_DATA, bitrateEstimate);
@@ -478,7 +478,7 @@ public class ExoMediaPlayer extends BaseInternalPlayer {
 
         @Override
         public void onPlayWhenReadyChanged(boolean playWhenReady, int reason) {
-            PLog.d(TAG, "onPlayerStateChanged: playWhenReady = " + playWhenReady + ", reason = " + reason);
+            PlayerLog.d(TAG, "onPlayerStateChanged: playWhenReady = " + playWhenReady + ", reason = " + reason);
             if (!isPreparing) {
                 if (playWhenReady) {
                     if (getState() == STATE_PREPARED) {
@@ -507,7 +507,7 @@ public class ExoMediaPlayer extends BaseInternalPlayer {
             String errorMessage = error.getMessage() == null ? "" : error.getMessage();
             Throwable cause = error.getCause();
             String causeMessage = cause != null ? cause.getMessage() : "";
-            PLog.e(TAG, errorMessage + ", causeMessage = " + causeMessage);
+            PlayerLog.e(TAG, errorMessage + ", causeMessage = " + causeMessage);
 
             Bundle bundle = BundlePool.obtain();
             bundle.putString("errorMessage", errorMessage);
@@ -540,7 +540,7 @@ public class ExoMediaPlayer extends BaseInternalPlayer {
 
         @Override
         public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
-            PLog.d(TAG, "onPlaybackParametersChanged: " + playbackParameters.toString());
+            PlayerLog.d(TAG, "onPlaybackParametersChanged: " + playbackParameters.toString());
         }
     };
 

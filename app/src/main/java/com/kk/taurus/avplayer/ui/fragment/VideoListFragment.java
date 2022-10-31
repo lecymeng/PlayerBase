@@ -21,7 +21,7 @@ import com.kk.taurus.avplayer.adapter.ListAdapter;
 import com.kk.taurus.avplayer.base.ISPayer;
 import com.kk.taurus.avplayer.ui.DetailPlayActivity;
 import com.kk.taurus.avplayer.play.ListPlayer;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 public class VideoListFragment extends Fragment implements ListAdapter.OnListListener {
 
@@ -79,7 +79,7 @@ public class VideoListFragment extends Fragment implements ListAdapter.OnListLis
                         ListPlayer.get().setReceiverConfigState(getActivity(), ISPayer.RECEIVER_GROUP_CONFIG_LIST_STATE);
                         ListPlayer.get().attachContainer(currentHolder.layoutContainer, false);
                     }else{
-                        PLog.e("VideoListFragment", "portrait itemHolder null");
+                        PlayerLog.e("VideoListFragment", "portrait itemHolder null");
                     }
                 }
             });

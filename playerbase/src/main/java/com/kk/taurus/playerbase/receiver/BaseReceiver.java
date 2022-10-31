@@ -22,7 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 /**
  * Created by Taurus on 2018/3/17.
@@ -132,7 +132,7 @@ public abstract class BaseReceiver implements IReceiver, StateGetter {
             if(receiver!=null){
                 return receiver.onPrivateEvent(eventCode, bundle);
             }else{
-                PLog.e("BaseReceiver",
+                PlayerLog.e("BaseReceiver",
                         "not found receiver use you incoming key.");
             }
         }

@@ -20,7 +20,7 @@ import android.os.Bundle;
 
 import com.kk.taurus.playerbase.entity.DataSource;
 import com.kk.taurus.playerbase.event.EventKey;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 /**
  * Created by Taurus on 2018/5/21.
@@ -84,7 +84,7 @@ public class OnAssistPlayEventHandler extends BaseEventAssistHandler<AssistPlay>
         if(bundle!=null){
             DataSource data = (DataSource) bundle.getSerializable(EventKey.SERIALIZABLE_DATA);
             if(data==null){
-                PLog.e("OnAssistPlayEventHandler","requestPlayDataSource need legal data source");
+                PlayerLog.e("OnAssistPlayEventHandler","requestPlayDataSource need legal data source");
                 return;
             }
             assist.stop();

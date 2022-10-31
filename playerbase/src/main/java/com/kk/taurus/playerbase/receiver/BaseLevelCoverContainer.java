@@ -21,7 +21,7 @@ import android.graphics.Color;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 
 /**
@@ -44,12 +44,12 @@ public abstract class BaseLevelCoverContainer extends AbsCoverContainer {
 
     @Override
     protected void onAvailableCoverAdd(BaseCover cover) {
-        PLog.d(TAG,"on available cover add : now count = " + getCoverCount());
+        PlayerLog.d(TAG,"on available cover add : now count = " + getCoverCount());
     }
 
     @Override
     protected void onCoverRemove(BaseCover cover) {
-        PLog.d(TAG,"on cover remove : now count = " + getCoverCount());
+        PlayerLog.d(TAG,"on cover remove : now count = " + getCoverCount());
 
     }
 
@@ -60,7 +60,7 @@ public abstract class BaseLevelCoverContainer extends AbsCoverContainer {
 
     @Override
     protected void onCoversRemoveAll() {
-        PLog.d(TAG,"on covers remove all ...");
+        PlayerLog.d(TAG,"on covers remove all ...");
 
     }
 

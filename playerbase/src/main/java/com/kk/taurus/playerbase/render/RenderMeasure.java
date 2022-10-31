@@ -18,7 +18,7 @@ package com.kk.taurus.playerbase.render;
 
 import android.view.View;
 
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 /**
  * Created by Taurus on 2017/11/20.
@@ -197,7 +197,7 @@ public final class RenderMeasure {
     }
 
     public void setVideoSize(int videoWidth, int videoHeight){
-        PLog.d(TAG,"videoWidth = " + videoWidth + " videoHeight = " + videoHeight);
+        PlayerLog.d(TAG,"videoWidth = " + videoWidth + " videoHeight = " + videoHeight);
         this.mVideoWidth = videoWidth;
         this.mVideoHeight = videoHeight;
     }

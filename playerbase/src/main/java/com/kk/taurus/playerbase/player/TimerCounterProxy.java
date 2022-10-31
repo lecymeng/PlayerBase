@@ -22,7 +22,7 @@ import android.os.Looper;
 import android.os.Message;
 
 import com.kk.taurus.playerbase.event.OnPlayerEventListener;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 /**
  * Created by Taurus on 2018/4/15.
@@ -66,10 +66,10 @@ public class TimerCounterProxy {
         this.useProxy = useProxy;
         if(!useProxy){
             cancel();
-            PLog.e("TimerCounterProxy", "Timer Stopped");
+            PlayerLog.e("TimerCounterProxy", "Timer Stopped");
         }else{
             start();
-            PLog.e("TimerCounterProxy", "Timer Started");
+            PlayerLog.e("TimerCounterProxy", "Timer Started");
         }
     }
 

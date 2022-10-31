@@ -22,26 +22,29 @@ import android.util.Log;
  * Created by Taurus on 2018/3/17.
  */
 
-public class PLog {
+public class PlayerLog {
 
-    public static boolean LOG_OPEN = false;
+    public static boolean ENABLE = false;
 
-    public static void d(String tag, String message){
-        if(!LOG_OPEN)
+    public static void d(String tag, String message) {
+        if (!ENABLE) {
             return;
-        Log.d(tag,message);
+        }
+        Log.d(tag, message);
     }
 
-    public static void w(String tag, String message){
-        if(!LOG_OPEN)
+    public static void w(String tag, String message) {
+        if (!ENABLE) {
             return;
-        Log.w(tag,message);
+        }
+        Log.w(tag, message);
     }
 
-    public static void e(String tag, String message){
-        if(!LOG_OPEN)
+    public static void e(String tag, String message) {
+        if (!ENABLE) {
             return;
-        Log.e(tag,message);
+        }
+        Log.e(tag, message);
     }
 
 }

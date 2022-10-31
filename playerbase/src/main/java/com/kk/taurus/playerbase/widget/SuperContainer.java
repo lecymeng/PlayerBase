@@ -31,7 +31,7 @@ import com.kk.taurus.playerbase.extension.IProducerGroup;
 import com.kk.taurus.playerbase.extension.DelegateReceiverEventSender;
 import com.kk.taurus.playerbase.extension.ProducerGroup;
 import com.kk.taurus.playerbase.extension.ProducerEventSender;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.receiver.CoverComparator;
 import com.kk.taurus.playerbase.receiver.StateGetter;
 import com.kk.taurus.playerbase.touch.OnTouchGestureListener;
@@ -243,7 +243,7 @@ public class SuperContainer extends FrameLayout implements OnTouchGestureListene
             BaseCover cover = (BaseCover) receiver;
             //add cover view to cover strategy container.
             mCoverStrategy.addCover(cover);
-            PLog.d(TAG, "on cover attach : " + cover.getTag() + " ," + cover.getCoverLevel());
+            PlayerLog.d(TAG, "on cover attach : " + cover.getTag() + " ," + cover.getCoverLevel());
         }
     }
 
@@ -254,7 +254,7 @@ public class SuperContainer extends FrameLayout implements OnTouchGestureListene
             BaseCover cover = (BaseCover) receiver;
             //remove cover view to cover strategy container.
             mCoverStrategy.removeCover(cover);
-            PLog.w(TAG, "on cover detach : " + cover.getTag() + " ," + cover.getCoverLevel());
+            PlayerLog.w(TAG, "on cover detach : " + cover.getTag() + " ," + cover.getCoverLevel());
         }
         //unbind the ReceiverEventListener for receivers connect.
         receiver.bindReceiverEventListener(null);
@@ -294,7 +294,7 @@ public class SuperContainer extends FrameLayout implements OnTouchGestureListene
 
     protected void removeAllCovers(){
         mCoverStrategy.removeAllCovers();
-        PLog.d(TAG,"detach all covers");
+        PlayerLog.d(TAG,"detach all covers");
     }
 
     //----------------------------------dispatch gesture touch event---------------------------------

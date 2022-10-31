@@ -18,7 +18,7 @@ package com.kk.taurus.playerbase.event;
 
 import android.os.Bundle;
 
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class BundlePool {
                 return mPool.get(i);
             }
         }
-        PLog.w("BundlePool","<create new bundle object>");
+        PlayerLog.w("BundlePool","<create new bundle object>");
         return new Bundle();
     }
 

@@ -22,7 +22,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 import com.kk.taurus.playerbase.player.IPlayer;
 
 import java.lang.ref.WeakReference;
@@ -71,7 +71,7 @@ public class RenderSurfaceView extends SurfaceView implements IRender {
 
     @Override
     public void setVideoRotation(int degree) {
-        PLog.e(TAG,"surface view not support rotation ... ");
+        PlayerLog.e(TAG,"surface view not support rotation ... ");
     }
 
     @Override
@@ -101,13 +101,13 @@ public class RenderSurfaceView extends SurfaceView implements IRender {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        PLog.d(TAG,"onSurfaceViewDetachedFromWindow");
+        PlayerLog.d(TAG,"onSurfaceViewDetachedFromWindow");
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        PLog.d(TAG,"onSurfaceViewAttachedToWindow");
+        PlayerLog.d(TAG,"onSurfaceViewAttachedToWindow");
     }
 
     @Override
@@ -140,7 +140,7 @@ public class RenderSurfaceView extends SurfaceView implements IRender {
 
         @Override
         public void surfaceCreated(SurfaceHolder holder) {
-            PLog.d(TAG,"<---surfaceCreated---->");
+            PlayerLog.d(TAG,"<---surfaceCreated---->");
             if(mRenderCallback!=null){
                 mRenderCallback.onSurfaceCreated(new InternalRenderHolder(holder),0,0);
             }
@@ -148,7 +148,7 @@ public class RenderSurfaceView extends SurfaceView implements IRender {
 
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-            PLog.d(TAG,"surfaceChanged : width = " + width + " height = " + height);
+            PlayerLog.d(TAG,"surfaceChanged : width = " + width + " height = " + height);
             if(mRenderCallback!=null){
                 mRenderCallback.onSurfaceChanged(new InternalRenderHolder(holder),format, width,height);
             }
@@ -156,7 +156,7 @@ public class RenderSurfaceView extends SurfaceView implements IRender {
 
         @Override
         public void surfaceDestroyed(SurfaceHolder holder) {
-            PLog.d(TAG,"***surfaceDestroyed***");
+            PlayerLog.d(TAG,"***surfaceDestroyed***");
             if(mRenderCallback!=null){
                 mRenderCallback.onSurfaceDestroy(new InternalRenderHolder(holder));
             }

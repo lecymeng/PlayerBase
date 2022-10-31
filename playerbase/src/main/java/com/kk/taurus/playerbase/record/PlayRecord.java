@@ -1,7 +1,7 @@
 package com.kk.taurus.playerbase.record;
 
 import com.kk.taurus.playerbase.entity.DataSource;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 /**
  * Created by Taurus on 2018/12/12.
@@ -32,7 +32,7 @@ class PlayRecord {
         if(data==null)
             return -1;
         int saveRecord = mRecordInvoker.saveRecord(data, record);
-        PLog.d(TAG,"<<Save>> : record = " + record);
+        PlayerLog.d(TAG,"<<Save>> : record = " + record);
         return saveRecord;
     }
 
@@ -52,7 +52,7 @@ class PlayRecord {
         if(data==null)
             return 0;
         int record = mRecordInvoker.getRecord(data);
-        PLog.d(TAG,"<<Get>> : record = " + record);
+        PlayerLog.d(TAG,"<<Get>> : record = " + record);
         return record;
     }
 

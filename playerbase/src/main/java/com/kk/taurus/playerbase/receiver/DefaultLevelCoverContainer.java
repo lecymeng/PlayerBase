@@ -21,7 +21,7 @@ import android.graphics.Color;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 /**
  * Created by Taurus on 2017/4/29.
@@ -72,13 +72,13 @@ public class DefaultLevelCoverContainer extends BaseLevelCoverContainer {
         int level = cover.getCoverLevel();
         if(level < ICover.COVER_LEVEL_MEDIUM){
             mLevelLowCoverContainer.addView(cover.getView(),getNewMatchLayoutParams());
-            PLog.d(TAG, "Low Level Cover Add : level = " + level);
+            PlayerLog.d(TAG, "Low Level Cover Add : level = " + level);
         }else if(level < ICover.COVER_LEVEL_HIGH){
             mLevelMediumCoverContainer.addView(cover.getView(),getNewMatchLayoutParams());
-            PLog.d(TAG, "Medium Level Cover Add : level = " + level);
+            PlayerLog.d(TAG, "Medium Level Cover Add : level = " + level);
         }else{
             mLevelHighCoverContainer.addView(cover.getView(),getNewMatchLayoutParams());
-            PLog.d(TAG, "High Level Cover Add : level = " + level);
+            PlayerLog.d(TAG, "High Level Cover Add : level = " + level);
         }
     }
 

@@ -19,7 +19,7 @@ package com.kk.taurus.playerbase.touch;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 /**
  * Created by Taurus on 2017/11/20.
@@ -71,7 +71,7 @@ public class BaseGestureCallbackHandler extends GestureDetector.SimpleOnGestureL
 
     @Override
     public boolean onDown(MotionEvent e) {
-        PLog.d(TAG,"onDown...");
+        PlayerLog.d(TAG,"onDown...");
         if(mOnTouchGestureListener !=null){
             mOnTouchGestureListener.onDown(e);
         }

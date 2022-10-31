@@ -15,7 +15,7 @@ import com.kk.taurus.avplayer.R;
 import com.kk.taurus.avplayer.bean.VideoBean;
 import com.kk.taurus.avplayer.utils.ImageDisplayEngine;
 import com.kk.taurus.avplayer.utils.PUtil;
-import com.kk.taurus.playerbase.log.PLog;
+import com.kk.taurus.playerbase.log.PlayerLog;
 
 import java.util.List;
 
@@ -77,7 +77,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.VideoItemHolde
                 super.onScrolled(recyclerView, dx, dy);
                 int itemVisibleRectHeight = getItemVisibleRectHeight(mPlayPosition);
                 if(mPlayPosition >= 0 && itemVisibleRectHeight <= 0 && dy != 0){
-                    PLog.d(TAG,"onScrollStateChanged stop itemVisibleRectHeight = " + itemVisibleRectHeight);
+                    PlayerLog.d(TAG,"onScrollStateChanged stop itemVisibleRectHeight = " + itemVisibleRectHeight);
                     ListPlayer.get().stop();
                     notifyItemChanged(mPlayPosition);
                     mPlayPosition = -1;
