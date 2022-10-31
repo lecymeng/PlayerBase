@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.vanniktech.maven.publish'
 
 android {
     compileSdkVersion 33
@@ -15,16 +16,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        compileOptions{
-        }
     }
 
-    lintOptions{
+    lintOptions {
         abortOnError false
     }
 }
 
 dependencies {
-    implementation "tv.danmaku.ijk.media:ijkplayer-java:0.8.8"
     implementation project(':playerbase')
+    implementation "tv.danmaku.ijk.media:ijkplayer-java:0.8.8"
 }

@@ -62,8 +62,8 @@ buildTypes {
 }
 
 dependencies {
-    implementation "com.weicools:player-base:3.5.0"
-    implementation "com.weicools:player-ijkplayer:3.5.0"
+    implementation "com.weicools:player-base:3.6.0"
+    implementation "com.weicools:player-ijkplayer:3.6.0"
     // ijk 官方的解码库依赖，较少格式版本且不支持 HTTPS
     implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
     // Other ABIs: optional
