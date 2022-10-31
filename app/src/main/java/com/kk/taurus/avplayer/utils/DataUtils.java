@@ -1,6 +1,5 @@
 package com.kk.taurus.avplayer.utils;
 
-import com.jiajunhui.xapp.medialoader.bean.VideoItem;
 import com.kk.taurus.avplayer.bean.VideoBean;
 
 import java.util.ArrayList;
@@ -31,31 +30,6 @@ public class DataUtils {
             VIDEO_URL_06,
             VIDEO_URL_07,
     };
-
-    public static List<VideoItem> getRemoteVideoItems(){
-        VideoItem item;
-        List<VideoItem> items = new ArrayList<>();
-        int len = urls.length;
-        for(int i=0;i<len;i++){
-            item = new VideoItem();
-            item.setPath(urls[i]);
-            item.setDisplayName(urls[i]);
-            items.add(item);
-        }
-        return items;
-    }
-
-    public static List<VideoBean> transList(List<VideoItem> items){
-        List<VideoBean> videoList = new ArrayList<>();
-        if(items!=null){
-            VideoBean bean;
-            for(VideoItem item:items){
-                bean = new VideoBean(item.getDisplayName(), null, item.getPath());
-                videoList.add(bean);
-            }
-        }
-        return videoList;
-    }
 
     public static List<VideoBean> getVideoList(int index, int offset) {
         List<VideoBean> videoList = getVideoList();
