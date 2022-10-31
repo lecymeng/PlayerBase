@@ -4,23 +4,25 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.kk.taurus.avplayer.App;
 import com.kk.taurus.avplayer.R;
+import com.kk.taurus.avplayer.adapter.OnItemClickListener;
+import com.kk.taurus.avplayer.adapter.SettingAdapter;
+import com.kk.taurus.avplayer.bean.SettingItem;
 import com.kk.taurus.avplayer.cover.ControllerCover;
 import com.kk.taurus.avplayer.cover.DanmuCover;
 import com.kk.taurus.avplayer.event_producer.DanmuDataProducer;
 import com.kk.taurus.avplayer.play.DataInter;
 import com.kk.taurus.avplayer.play.ReceiverGroupManager;
-import com.kk.taurus.avplayer.utils.DataUtils;
 import com.kk.taurus.avplayer.utils.PUtil;
 import com.kk.taurus.playerbase.assist.InterEvent;
 import com.kk.taurus.playerbase.assist.OnVideoViewEventHandler;
@@ -33,10 +35,6 @@ import com.kk.taurus.playerbase.receiver.ReceiverGroup;
 import com.kk.taurus.playerbase.render.AspectRatio;
 import com.kk.taurus.playerbase.render.IRender;
 import com.kk.taurus.playerbase.widget.BaseVideoView;
-
-import com.kk.taurus.avplayer.adapter.OnItemClickListener;
-import com.kk.taurus.avplayer.adapter.SettingAdapter;
-import com.kk.taurus.avplayer.bean.SettingItem;
 
 public class BaseVideoViewActivity extends AppCompatActivity implements
         OnItemClickListener<SettingAdapter.SettingItemHolder, SettingItem>, OnPlayerEventListener {
@@ -90,7 +88,9 @@ public class BaseVideoViewActivity extends AppCompatActivity implements
 
     private void initPlay(){
         if(!hasStart){
-            DataSource dataSource = new DataSource(DataUtils.VIDEO_URL_09);
+            // DataSource dataSource = new DataSource(DataUtils.VIDEO_URL_09);
+            DataSource dataSource = new DataSource();
+            dataSource.setRawId(R.raw.big_buck_bunny);
             dataSource.setTitle("音乐和艺术如何改变世界");
             mVideoView.setDataSource(dataSource);
             mVideoView.start();
@@ -147,7 +147,10 @@ public class BaseVideoViewActivity extends AppCompatActivity implements
     };
 
     private void replay(){
-        mVideoView.setDataSource(new DataSource(DataUtils.VIDEO_URL_09));
+        // DataSource dataSource = new DataSource(DataUtils.VIDEO_URL_09);
+        DataSource dataSource = new DataSource();
+        dataSource.setRawId(R.raw.big_buck_bunny);
+        mVideoView.setDataSource(dataSource);
         mVideoView.start();
     }
 

@@ -1,62 +1,54 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.kk.taurus.avplayer"
-        minSdkVersion 16
-        targetSdkVersion 28
+        minSdkVersion 21
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        ndk {
-            //目前手机主流cpu架构是armeabi-v7a，所以通常情况下只考虑armeabi-v7a(除非特殊情况，比如TBS只有armeabi so库)
-            // https://zhuanlan.zhihu.com/p/26833002
-            // 1,如果同时保留 armeabi 和 armeabi-v7a 两个文件夹，则必须保证这两个文件夹中 .so 数量一致
-            // 2,如果只存在armeabi-v7a，则对只提供 armeabi 版本的第三方 .so，原样复制一份到 armeabi-v7a 文件夹
-            abiFilters 'armeabi-v7a'
-        }
     }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        compileOptions{
+        compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
         }
     }
 
-    lintOptions{
+    lintOptions {
         abortOnError false
     }
-
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.jiajunhui.xapp.medialoader:medialoader:1.2.1'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.lovedise:permissiongen:0.0.6'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.7.0'
+
+    // implementation 'com.jiajunhui.xapp.medialoader:medialoader:1.2.1'
+    implementation("com.guolindev.permissionx:permissionx:1.7.1")
+
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
-    implementation project(':exoplayer')
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
+
+    implementation project(':playerbase')
     implementation project(':ijkplayer')
-    implementation 'com.google.android.material:material:1.0.0'
 
     implementation 'com.github.ctiao:DanmakuFlameMaster:0.9.25'
     implementation 'com.github.ctiao:ndkbitmap-armv7a:0.9.21'
 
-    implementation 'com.google.android.exoplayer:extension-rtmp:2.12.2'
+    implementation 'com.google.android.exoplayer:extension-rtmp:2.18.1'
 
 }

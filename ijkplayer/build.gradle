@@ -1,12 +1,11 @@
 apply plugin: 'com.android.library'
-//apply from: 'bintray.gradle'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 33
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 29
+        minSdkVersion 19
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
     }
@@ -17,20 +16,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         compileOptions{
-
         }
     }
 
     lintOptions{
         abortOnError false
     }
-
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-
-    api "tv.danmaku.ijk.media:ijkplayer-java:$ijksdkVersion"
-    api "com.kk.taurus.playerbase:playerbase:$playerbaseVersion"
-//    api project(':playerbase')
+    implementation "tv.danmaku.ijk.media:ijkplayer-java:0.8.8"
+    implementation project(':playerbase')
 }
