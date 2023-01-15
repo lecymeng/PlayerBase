@@ -22,7 +22,6 @@ import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,11 +50,9 @@ import com.kk.taurus.playerbase.render.RenderTextureView;
 import com.kk.taurus.playerbase.style.IStyleSetter;
 import com.kk.taurus.playerbase.style.StyleSetter;
 
-
 /**
  * Created by Taurus on 2018/3/17.
  */
-
 public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSetter {
 
     final String TAG = "BaseVideoView";
@@ -114,9 +111,7 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
         mSuperContainer = onCreateSuperContainer(context);
         mSuperContainer.setStateGetter(mInternalStateGetter);
         mSuperContainer.setOnReceiverEventListener(mInternalReceiverEventListener);
-        addView(mSuperContainer,
-                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT));
+        addView(mSuperContainer, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
     }
 
     /**
@@ -125,8 +120,6 @@ public class BaseVideoView extends FrameLayout implements IVideoView, IStyleSett
      * see also
      * {@link SuperContainer#dispatchPlayEvent(int, Bundle)}
      * {@link SuperContainer#dispatchErrorEvent(int, Bundle)}
-     *
-     * @return
      */
     public final SuperContainer getSuperContainer(){
         return mSuperContainer;
